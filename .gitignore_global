@@ -1,0 +1,15 @@
+.DS_Store?
+*.log
+*.sqlite3
+*.db
+tmp/**/*
+Icon?
+
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+.zip
