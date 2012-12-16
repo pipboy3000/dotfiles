@@ -26,6 +26,10 @@ Bundle 'unite.vim'
 Bundle 'h1mesuke/unite-outline'
 Bundle 'ujihisa/unite-rake'
 Bundle 'fugitive.vim'
+Bundle 'textobj-user'
+Bundle 'rhysd/vim-textobj-ruby'
+Bundle 'mattn/zencoding-vim'
+Bundle 'hail2u/vim-css3-syntax'
 
 syntax on
 filetype plugin indent on
