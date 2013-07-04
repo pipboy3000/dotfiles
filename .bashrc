@@ -30,3 +30,12 @@ shopt -s checkwinsize
 eval "$(rbenv init -)"
 
 export NODE_PATH="/usr/local/lib/node_modules"
+
+. `brew --prefix`/etc/profile.d/z.sh
+function precmd() {
+    z --add "$(pwd -P)"
+}
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+

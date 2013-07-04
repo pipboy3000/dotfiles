@@ -1,4 +1,4 @@
-" vim:set ts=8 sts=2 sw=2 tw=0:
+"k vim:set ts=8 sts=2 sw=2 tw=0:
 set nocompatible
 filetype off
 
@@ -7,29 +7,31 @@ call vundle#rc()
 
 " vundle
 Bundle 'gmarik/vundle'
-" Bundle 'msanders/snipmate.vim'
+
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
+" Bundle 'SuperTab'
+Bundle 'snipmate-snippets'
 Bundle 'tpope/vim-surround'
 Bundle 'thinca/vim-quickrun.git'
-Bundle 'SuperTab'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'Markdown'
 Bundle 'pangloss/vim-javascript'
+Bundle 'jelera/vim-javascript-syntax'
 Bundle 'Syntastic'
-Bundle 'rails.vim'
-Bundle 'vim-ruby/vim-ruby'
 Bundle 'unite.vim'
-Bundle 'h1mesuke/unite-outline'
-Bundle 'ujihisa/unite-rake'
-Bundle 'fugitive.vim'
 Bundle 'textobj-user'
-Bundle 'rhysd/vim-textobj-ruby'
 Bundle 'mattn/zencoding-vim'
 Bundle 'hail2u/vim-css3-syntax'
+Bundle 'othree/html5.vim'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'tpope/vim-rails.git'
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+Bundle 'ctrlp.vim'
+Bundle 'open-browser.vim'
 
 syntax on
 filetype plugin indent on
@@ -44,7 +46,7 @@ set fileformats=unix,dos,mac
 set iminsert=0
 set imsearch=0
 
-set clipboard+=unnamed
+set clipboard=unnamed
 set pastetoggle=<F10>
 set autowrite
 set autoread
@@ -98,9 +100,9 @@ set foldopen=block,hor,mark,percent,quickfix,tag
 
 " ruby support
 " ------------
-au FileType ruby set ts=2 sw=2 sts=2 ft=ruby.sinatra
+au FileType ruby set ts=2 sw=2 sts=2
 au BufNewFile,BufRead *.ru setf ruby
-au BufNewFile,BufRead Gemfile* setf ruby
+au BufNewFile,BufRead Gemfile setf ruby
 
 " html/xml support
 " ----------------
@@ -140,6 +142,7 @@ let g:is_bash = 1
 " markdown
 " ----------
 autocmd BufNewFile,BufRead *.markdown,*.md,*.mkd,*.mdown,*.mkdn set ft=markdown
+au FileType markdown set sw=2 ts=2 sts=2
 
 " File Browser
 " ------------
@@ -173,8 +176,6 @@ nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
 nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
 " set
 nnoremap <silent> ,uu :<C-u>Unite buffer -buffer-name=files file file_mru<CR>
-" outline
-nnoremap <silent> ,uo :<C-u>Unite outline<CR>
 
 " open split
 au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
@@ -189,4 +190,26 @@ let g:quickrun_config = {}
 " syntastic
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1 
+let g:syntastic_loc_list_height = 5
 
+" Dash.app
+left g:dash_map = {
+  \ 'ruby'          : 'rails',
+  \ 'javascript'    : 'jq'
+  \ }
+nmap <silent> <leader>d <Plug>DashSearch
+
+" ctrlp
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|sass-cache\|bundle'
+" let g:ctrlp_user_command = 'find %s -type f'
+
+" nerdtree
+let NERDTreeIgnore=['node_modules', '.sass-cache']
+
+" open browser
+nmap ,ob <Plug>(openbrowser-smart-search)
+vmap ,ob <Plug>(openbrowser-smart-search)
