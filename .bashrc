@@ -39,3 +39,7 @@ function precmd() {
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+### AWS
+if [ -f ~/.aws_settings ]; then
+    source ~/.aws_settings
+fi
