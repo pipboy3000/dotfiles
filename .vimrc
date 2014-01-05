@@ -8,35 +8,38 @@ call vundle#rc()
 " vundle
 Bundle 'gmarik/vundle'
 
+Bundle "vim-jp/vimdoc-ja"
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 " Bundle 'SuperTab'
-Bundle 'snipmate-snippets'
+Bundle 'honza/vim-snippets'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-rails.git'
 Bundle 'thinca/vim-quickrun.git'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'Markdown'
-Bundle 'pangloss/vim-javascript'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'Syntastic'
-Bundle 'unite.vim'
+Bundle 'scrooloose/syntastic'
 Bundle 'textobj-user'
-Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/emmet-vim'
 Bundle 'hail2u/vim-css3-syntax'
 Bundle 'othree/html5.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'kchmck/vim-coffee-script'
 Bundle 'scrooloose/nerdtree.git'
-Bundle 'tpope/vim-rails.git'
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
+Bundle 'unite.vim'
 Bundle 'ctrlp.vim'
+Bundle 'sgur/ctrlp-extensions.vim'
 Bundle 'open-browser.vim'
+Bundle 'noahfrederick/vim-hemisu'
+Bundle 'slim-template/vim-slim'
 
 syntax on
 filetype plugin indent on
 
-colorscheme wombat256
+set background=dark
+colorscheme hemisu
 
 set enc=utf-8
 set fenc=utf-8
@@ -65,6 +68,7 @@ set backspace=indent,eol,start
 set formatoptions+=m
 " set complete+=k
 set vb
+set keywordprg=:help
 
 set autoindent
 set cindent
@@ -159,9 +163,7 @@ vnoremap j gj
 vnoremap k gk
 
 " emacs like
-imap <C-a> <C-o>0
 imap <C-e> <C-o>$
-map <C-a> 0
 map <C-e> $
 
 " unite.vim
@@ -192,13 +194,6 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list = 1 
 let g:syntastic_loc_list_height = 5
 
-" Dash.app
-left g:dash_map = {
-  \ 'ruby'          : 'rails',
-  \ 'javascript'    : 'jq'
-  \ }
-nmap <silent> <leader>d <Plug>DashSearch
-
 " ctrlp
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
@@ -213,3 +208,6 @@ let NERDTreeIgnore=['node_modules', '.sass-cache']
 " open browser
 nmap ,ob <Plug>(openbrowser-smart-search)
 vmap ,ob <Plug>(openbrowser-smart-search)
+
+" reload vimrc
+nnoremap <Space>s. :<C-u>source ~/.vimrc<CR>
