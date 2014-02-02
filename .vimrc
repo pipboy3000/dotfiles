@@ -201,6 +201,7 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|sass-cache\|bundle'
 " let g:ctrlp_user_command = 'find %s -type f'
+let g:ctrlp_extensions = ['mixed', 'dir']
 
 " nerdtree
 let NERDTreeIgnore=['node_modules', '.sass-cache']
