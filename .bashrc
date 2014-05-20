@@ -10,7 +10,7 @@ alias rm='rm -iv'
 alias mv='mv -iv'
 alias grep='grep --color'
 
-export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin:"
+export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
 
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
@@ -43,6 +43,9 @@ export PATH="/usr/local/heroku/bin:$PATH"
 if [ -f ~/.aws_settings ]; then
     source ~/.aws_settings
 fi
+
+### home bin
+export PATH="/Users/count0/bin:$PATH"
 
 # get current branch in git repo
 function parse_git_branch() {
@@ -92,3 +95,7 @@ function parse_git_dirty {
 }
 
 export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]:\w \[\e[34;40m\]\`parse_git_branch\`\[\e[m\]\n\\$ "
+
+# GOLANG
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin

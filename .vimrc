@@ -8,32 +8,36 @@ call vundle#rc()
 " vundle
 Bundle 'gmarik/vundle'
 
-Bundle "vim-jp/vimdoc-ja"
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-" Bundle 'SuperTab'
+Bundle 'ctrlp.vim'
+Bundle 'garbas/vim-snipmate'
+Bundle 'h1mesuke/unite-outline'
+Bundle 'hail2u/vim-css3-syntax'
 Bundle 'honza/vim-snippets'
-Bundle 'tpope/vim-surround'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'kana/vim-smartinput'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'mattn/emmet-vim'
+Bundle 'noahfrederick/vim-hemisu'
+Bundle 'open-browser.vim'
+Bundle 'othree/html5.vim'
+Bundle 'othree/javascript-libraries-syntax.vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'plasticboy/vim-markdown'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'scrooloose/syntastic'
+Bundle 'sgur/ctrlp-extensions.vim'
+Bundle 'slim-template/vim-slim'
+Bundle 'textobj-user'
+Bundle 'thinca/vim-quickrun.git'
+Bundle 'tomtom/tlib_vim'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-rails.git'
-Bundle 'thinca/vim-quickrun.git'
-Bundle 'Markdown'
-Bundle 'scrooloose/syntastic'
-Bundle 'textobj-user'
-Bundle 'mattn/emmet-vim'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'othree/html5.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'scrooloose/nerdtree.git'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
 Bundle 'unite.vim'
-Bundle 'ctrlp.vim'
-Bundle 'sgur/ctrlp-extensions.vim'
-Bundle 'open-browser.vim'
-Bundle 'noahfrederick/vim-hemisu'
-Bundle 'slim-template/vim-slim'
+Bundle 'vim-jp/vimdoc-ja'
+Bundle 'vim-scripts/JavaScript-Indent'
 
 syntax on
 filetype plugin indent on
@@ -71,6 +75,7 @@ set vb
 set keywordprg=:help
 
 set autoindent
+set smartindent
 set cindent
 set cinoptions=:s,ts,cs
 set cinwords=if,else,while,do,for,switch,case
@@ -110,10 +115,11 @@ au BufNewFile,BufRead Gemfile setf ruby
 
 " html/xml support
 " ----------------
-let html_no_rendering=1
-let eruby_percent_processing=1
+" let html_no_rendering=1
+" let eruby_percent_processing=1
+" let g:html_indent_inctags = "html,body,head,tbody"
 au FileType html,xhtml,xml,eruby set sw=2 ts=2 sts=2
-au Filetype html,xhtml set indentexpr&
+" au Filetype html,xhtml set indentexpr&
 
 " CSS
 " ---
@@ -121,8 +127,11 @@ au FileType css,scss set ts=2 sw=2 sts=2
 
 " Javascript
 " ----------
-au FileType javascript set sw=2 ts=2 sts=2
 let javascript_enable_domhtmlcss=1
+au FileType javascript set sw=2 ts=2 sts=2
+autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
+autocmd BufReadPre *.js let b:javascript_lib_use_underscore = 1
+autocmd BufReadPre *.js let b:javascript_lib_use_backbone = 1
 
 " CoffeeScript
 " ----------

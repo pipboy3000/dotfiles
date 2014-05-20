@@ -14,6 +14,7 @@ install go
 install lv
 install jq
 install node
+install npm
 install packer
 install rbenv
 install ruby-build
