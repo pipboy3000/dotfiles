@@ -2,16 +2,17 @@ export CLICOLOR=1
 TERM=xterm-256color
 
 alias less=lv
-alias ls='ls -G -F -v -h'
-alias ll="ls -lh"
+alias ls='ls -GAFvh'
+alias ll="ls -l"
 alias la="ls -a"
 alias cp='cp -iv'
 alias rm='rm -iv'
 alias mv='mv -iv'
 alias grep='grep --color'
 
+export HISTCONTROL=ignoreboth:erasedups
+export HISTIGNORE="ls:ls *:ll:ll *:cd:cd -:pwd"
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
-
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
 export LANG=ja_JP.UTF-8

@@ -156,6 +156,17 @@ let g:is_bash = 1
 " ----------
 autocmd BufNewFile,BufRead *.markdown,*.md,*.mkd,*.mdown,*.mkdn set ft=markdown
 au FileType markdown set sw=2 ts=2 sts=2
+let g:markdown_fenced_languages = [
+\  'coffee',
+\  'css',
+\  'erb=eruby',
+\  'js=javascript',
+\  'json=javascript',
+\  'ruby',
+\  'sass',
+\  'xml',
+\  'html'
+\]
 
 " File Browser
 " ------------

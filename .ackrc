@@ -2,3 +2,8 @@
 --color
 --follow
 --group
+--ignore-dir=log
+--ignore-dir=tmp
+--ignore-dir=vendor
+--ignore-dir=.sass-cache
+
