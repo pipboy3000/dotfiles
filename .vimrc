@@ -1,43 +1,46 @@
-"k vim:set ts=8 sts=2 sw=2 tw=0:
+" vim:set ts=8 sts=2 sw=2 tw=0:
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'ctrlp.vim'
-Bundle 'garbas/vim-snipmate'
-Bundle 'h1mesuke/unite-outline'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'honza/vim-snippets'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'kana/vim-smartinput'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'mattn/emmet-vim'
-Bundle 'noahfrederick/vim-hemisu'
-Bundle 'open-browser.vim'
-Bundle 'othree/html5.vim'
-Bundle 'othree/javascript-libraries-syntax.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'plasticboy/vim-markdown'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'scrooloose/syntastic'
-Bundle 'sgur/ctrlp-extensions.vim'
-Bundle 'slim-template/vim-slim'
-Bundle 'textobj-user'
-Bundle 'thinca/vim-quickrun.git'
-Bundle 'tomtom/tlib_vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-rails.git'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'unite.vim'
-Bundle 'vim-jp/vimdoc-ja'
-Bundle 'vim-scripts/JavaScript-Indent'
+Plugin 'garbas/vim-snipmate'
+Plugin 'h1mesuke/unite-outline'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'honza/vim-snippets'
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'kana/vim-smartinput'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'kien/ctrlp.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'mattn/emmet-vim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'noahfrederick/vim-hemisu'
+Plugin 'open-browser.vim'
+Plugin 'othree/html5.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'scrooloose/nerdtree.git'
+Plugin 'scrooloose/syntastic'
+Plugin 'slim-template/vim-slim'
+Plugin 'textobj-user'
+Plugin 'thinca/vim-quickrun.git'
+Plugin 'tomtom/tlib_vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails.git'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'unite.vim'
+Plugin 'vim-jp/vimdoc-ja'
+Plugin 'vim-scripts/JavaScript-Indent'
+
+call vundle#end()
 
 syntax on
 filetype plugin indent on
@@ -47,7 +50,7 @@ colorscheme hemisu
 
 set enc=utf-8
 set fenc=utf-8
-set fencs=iso-2022-jp,utf-8,euc-jp,cp932
+set fencs=utf-8,euc-jp,cp932,iso-2022-jp
 set fileformats=unix,dos,mac
 
 set iminsert=0
@@ -103,7 +106,7 @@ set statusline=%<%F\ %r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%4v(ASC
 set tabpagemax=15
 
 set foldenable
-set foldmethod=marker
+set foldmethod=manual
 set foldlevel=100
 set foldopen=block,hor,mark,percent,quickfix,tag
 
@@ -221,7 +224,6 @@ let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|sass-cache\|bundle'
 " let g:ctrlp_user_command = 'find %s -type f'
-let g:ctrlp_extensions = ['mixed', 'dir']
 
 " nerdtree
 let NERDTreeIgnore=['node_modules', '.sass-cache']

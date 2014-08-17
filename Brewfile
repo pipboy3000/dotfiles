@@ -6,13 +6,14 @@ tap phinze/homebrew-cask
 tap homebrew/binary
 
 # Packages
+install ack
 install bash-completion
 install brew-cask
 install figlet
 install git
 install go
-install lv
 install jq
+install lv
 install node
 install npm
 install packer
@@ -21,9 +22,9 @@ install ruby-build
 install tmux
 install tree
 install vim
+install wget
 install z
 install zlib
-install wget
 
 # tmux share osx clipboard
 install reattach-to-user-namespace
@@ -36,7 +37,6 @@ cask install github
 cask install google-chrome
 cask install imageoptim
 cask install skitch
-cask install skype
 cask install utorrent
 cask install vagrant
 cask install virtualbox

@@ -1,4 +1,4 @@
-colorscheme wombat256
+colorscheme hemisu
 
 set guioptions-=T
 set ambiwidth=double
@@ -19,11 +19,11 @@ if has("win32")
   endif
 elseif has("gui_macvim")
   " Font
-  set gfw=Ricty:h12
+  set gfw=Ricty:h14
   set gfn=Ricty:h14
 
   set imdisable
-  set transparency=10
+  " set transparency=10
 
   let macvim_skip_cmd_opt_movement = 1
   let macvim_hig_shift_movement = 1
