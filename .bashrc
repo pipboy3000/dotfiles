@@ -9,6 +9,7 @@ alias cp='cp -iv'
 alias rm='rm -iv'
 alias mv='mv -iv'
 alias grep='grep --color'
+alias f='open .'
 
 export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE="ls:ls *:ll:ll *:cd:cd -:pwd"

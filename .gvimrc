@@ -1,6 +1,7 @@
 colorscheme hemisu
 
 set guioptions-=T
+set guioptions-=m
 set ambiwidth=double
 
 " mouse
@@ -19,8 +20,8 @@ if has("win32")
   endif
 elseif has("gui_macvim")
   " Font
-  set gfw=Ricty:h14
-  set gfn=Ricty:h14
+  set gfw=Ricty\ Discord:h16
+  set gfn=Ricty\ Discord:h16
 
   set imdisable
   " set transparency=10

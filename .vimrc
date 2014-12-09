@@ -25,6 +25,7 @@ Plugin 'othree/html5.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'pangloss/vim-javascript'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'scrooloose/syntastic'
 Plugin 'slim-template/vim-slim'
@@ -39,6 +40,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'unite.vim'
 Plugin 'vim-jp/vimdoc-ja'
 Plugin 'vim-scripts/JavaScript-Indent'
+Plugin 'whatyouhide/vim-gotham'
 
 call vundle#end()
 
@@ -46,7 +48,7 @@ syntax on
 filetype plugin indent on
 
 set background=dark
-colorscheme hemisu
+colorscheme gotham256
 
 set enc=utf-8
 set fenc=utf-8
@@ -104,6 +106,8 @@ set listchars=tab:>\
 set scrolloff=5
 set statusline=%<%F\ %r%h%w%y%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%4v(ASCII=%03.3b,HEX=%02.2B)\ %l/%L(%P)%m
 set tabpagemax=15
+
+set undodir=~/.vim/undo
 
 set foldenable
 set foldmethod=manual
@@ -219,10 +223,11 @@ let g:syntastic_loc_list_height = 5
 
 " ctrlp
 let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|sass-cache\|bundle'
+let g:ctrlp_extensions = ['tag', 'quickfix', 'line', 'mixed']
 " let g:ctrlp_user_command = 'find %s -type f'
 
 " nerdtree
@@ -234,3 +239,4 @@ vmap ,ob <Plug>(openbrowser-smart-search)
 
 " reload vimrc
 nnoremap <Space>s. :<C-u>source ~/.vimrc<CR>
+
