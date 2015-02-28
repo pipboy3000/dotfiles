@@ -42,7 +42,7 @@ function precmd() {
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### AWS
-if [ -f ~/.awscredentials ]; then
+if [ -f ~/.aws/credentials ]; then
     source ~/.aws/credentials
 fi
 
