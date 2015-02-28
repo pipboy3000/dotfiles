@@ -12,3 +12,4 @@ fi
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}

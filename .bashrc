@@ -12,8 +12,8 @@ alias grep='grep --color'
 alias f='open .'
 
 export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE="ls:ls *:ll:ll *:cd:cd -:pwd"
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
 export LANG=ja_JP.UTF-8
@@ -42,8 +42,8 @@ function precmd() {
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### AWS
-if [ -f ~/.aws_settings ]; then
-    source ~/.aws_settings
+if [ -f ~/.awscredentials ]; then
+    source ~/.aws/credentials
 fi
 
 ### home bin

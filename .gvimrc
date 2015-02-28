@@ -1,5 +1,3 @@
-colorscheme hemisu
-
 set guioptions-=T
 set guioptions-=m
 set ambiwidth=double
@@ -10,8 +8,6 @@ set mouse=a
 set nomousefocus
 set mousehide
 
-" set termencoding=japan
-" set imdisable
 if has("win32")
   " Font
   set gfn=BDF_M+:h9:cANSI
