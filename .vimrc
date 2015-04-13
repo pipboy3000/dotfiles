@@ -16,7 +16,9 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-smartinput'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
+Plugin 'mxw/vim-jsx'
 Plugin 'open-browser.vim'
+Plugin 'pangloss/vim-javascript'
 Plugin 'scrooloose/syntastic'
 Plugin 'thinca/vim-quickrun.git'
 Plugin 'tpope/vim-fugitive'
@@ -73,6 +75,10 @@ if has('persistent_undo')
   set undodir=~/.vim/undo
   set undofile
 endif
+
+" JavaScript
+" ------------------------------------------------------------------------------
+let javascript_enable_domhtmlcss = 1
 
 " coffeescript
 " ------------------------------------------------------------------------------
