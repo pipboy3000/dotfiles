@@ -14,6 +14,7 @@ alias f='open .'
 export HISTCONTROL=ignoreboth:erasedups
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
+export PATH=$PATH:~/.composer/vendor/bin
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
 export LANG=ja_JP.UTF-8

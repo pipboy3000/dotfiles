@@ -27,6 +27,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'unite.vim'
 Plugin 'vim-jp/vimdoc-ja'
+Plugin 'thinca/vim-qfreplace'
 
 call vundle#end()
 
