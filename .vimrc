@@ -10,24 +10,38 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+" Plugin 'mxw/vim-jsx'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'honza/vim-snippets'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-smartinput'
+Plugin 'kana/vim-textobj-user'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'mattn/emmet-vim'
-Plugin 'mxw/vim-jsx'
+Plugin 'mattn/jscomplete-vim'
+Plugin 'myhere/vim-nodejs-complete'
+Plugin 'nicklasos/vim-jsx-riot'
 Plugin 'open-browser.vim'
 Plugin 'pangloss/vim-javascript'
+Plugin 'rhysd/vim-textobj-ruby'
+Plugin 'rking/ag.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'SirVer/ultisnips'
+Plugin 'slim-template/vim-slim'
+Plugin 'terryma/vim-expand-region'
+Plugin 'thinca/vim-qfreplace'
 Plugin 'thinca/vim-quickrun.git'
+Plugin 'todesking/ruby_hl_lvar.vim'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
-Plugin 'unite.vim'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-jp/vimdoc-ja'
-Plugin 'thinca/vim-qfreplace'
+Plugin 'vim-scripts/AnsiEsc.vim'
 
 call vundle#end()
 
@@ -36,9 +50,9 @@ call vundle#end()
 syntax on
 filetype plugin indent on
 
-colorscheme gotham
+colorscheme hybrid
 set clipboard=unnamed
-set wildmode=list:longest,full
+set wildmode=longest,list:longest
 set number
 set showcmd
 set hidden
@@ -77,9 +91,19 @@ if has('persistent_undo')
   set undofile
 endif
 
+if &term =~ '256color'
+  " disable Background Color Erase (BCE) so that color schemes
+  " render properly when inside 256-color tmux and GNU screen.
+  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
+
 " JavaScript
 " ------------------------------------------------------------------------------
 let javascript_enable_domhtmlcss = 1
+autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
+" riot tag
+autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
 
 " coffeescript
 " ------------------------------------------------------------------------------
@@ -87,7 +111,7 @@ autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
 
 " git
 " ------------------------------------------------------------------------------
-au BufRead,BufNewFile COMMIT_EDITMSG setf git 
+autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git 
 
 " markdown
 " ------------------------------------------------------------------------------
@@ -97,23 +121,6 @@ let g:markdown_fenced_languages = [
       \  'sass', 'xml', 'html'
       \]
 
-" unite.vim
-" ------------------------------------------------------------------------------
-" let g:unite_enable_start_insert=1
-" buffers
-nnoremap <silent> ,ub :<C-u>Unite buffer<CR>
-" files
-nnoremap <silent> ,uf :<C-u>UniteWithBufferDir -buffer-name=files file<CR>
-" register
-nnoremap <silent> ,ur :<C-u>Unite -buffer-name=register register<CR>
-" MRU
-nnoremap <silent> ,um :<C-u>Unite file_mru<CR>
-" open split
-au FileType unite nnoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-j> unite#do_action('split')
-au FileType unite nnoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vsplit')
-
 " quickrun
 " ------------------------------------------------------------------------------
 silent! map <unique> <Space>q <Plug>(quickrun)
@@ -122,12 +129,19 @@ let g:quickrun_config['coffee'] = {'command': 'coffee', 'exec': ['%c -cbp %s']}
 
 " syntastic
 " ------------------------------------------------------------------------------
+let g:syntastic_mode_map = {
+  \ "mode": "active",
+  \ "active_filetypes": [],
+  \ "passive_filetypes": ['ruby'] }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1 
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0 
 let g:syntastic_enable_signs = 1
 let g:syntastic_loc_list_height = 5
+let g:syntastic_scss_checkers = ['sassc']
+let g:syntastic_ruby_checkers = ['rubocop']
+let g:syntastic_html_tidy_exec = 'tidy5'
 
 " ctrlp
 " ------------------------------------------------------------------------------
@@ -137,10 +151,30 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_extensions = ['dir', 'quickfix', 'mixed']
 let g:ctrlp_open_multiple_files = '2hi'
 let g:ctrlp_prompt_mappings = { 'MarkToOpen()': ['<c-@>'] }
+if executable('ag')
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
+endif
+
+" YCM
+" ------------------------------------------------------------------------------
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+
+" ultisnips
+" ------------------------------------------------------------------------------
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 
 " Easy align
 " ------------------------------------------------------------------------------
 vnoremap <silent> <Enter> :EasyAlign<cr>
+
+
+" Rsense
+" ------------------------------------------------------------------------------
+let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
 
 " keymap
 " ------------------------------------------------------------------------------
