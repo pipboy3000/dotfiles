@@ -163,9 +163,9 @@ let g:ycm_key_list_previous_completion=[]
 
 " ultisnips
 " ------------------------------------------------------------------------------
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 
 " Easy align
 " ------------------------------------------------------------------------------

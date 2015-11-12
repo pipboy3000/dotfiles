@@ -1,7 +1,7 @@
 export CLICOLOR=1
 TERM=xterm-256color
 
-alias less=lv
+#alias less=lv
 alias ls='ls -GAFvh'
 alias ll="ls -l"
 alias la="ls -a"
@@ -10,6 +10,7 @@ alias rm='rm -iv'
 alias mv='mv -iv'
 alias grep='grep --color'
 alias f='open .'
+alias git=hub
 
 export HISTCONTROL=ignoreboth:erasedups
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
