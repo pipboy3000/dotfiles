@@ -40,3 +40,15 @@ Icon?
 *.rar
 *.tar
 .zip
+
+# Created by https://www.gitignore.io/api/vim
+
+### Vim ###
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+.env

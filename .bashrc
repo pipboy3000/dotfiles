@@ -11,6 +11,7 @@ alias mv='mv -iv'
 alias grep='grep --color'
 alias f='open .'
 alias git=hub
+alias mount_pi2='sshfs pi@raspberrypi2.local:/home/pi ~/Desktop/mnt/'
 
 export HISTCONTROL=ignoreboth:erasedups
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
@@ -44,8 +45,8 @@ function precmd() {
 export PATH="/usr/local/heroku/bin:$PATH"
 
 ### AWS
-if [ -f ~/.aws/credentials ]; then
-    source ~/.aws/credentials
+if [ -f ~/.aws/blog ]; then
+    source ~/.aws/blog
 fi
 
 ### home bin
@@ -103,3 +104,4 @@ export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]:\w \[\e[34;40m\]\`parse_gi
 # GOLANG
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+complete -C '/usr/local/bin/aws_completer' aws

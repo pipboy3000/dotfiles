@@ -10,7 +10,6 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-" Plugin 'mxw/vim-jsx'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'honza/vim-snippets'
@@ -18,8 +17,11 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-smartinput'
 Plugin 'kana/vim-textobj-user'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'lambdalisue/vim-gista'
+Plugin 'leafgarland/typescript-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'mattn/jscomplete-vim'
+Plugin 'mxw/vim-jsx'
 Plugin 'myhere/vim-nodejs-complete'
 Plugin 'nicklasos/vim-jsx-riot'
 Plugin 'open-browser.vim'
@@ -32,7 +34,6 @@ Plugin 'slim-template/vim-slim'
 Plugin 'terryma/vim-expand-region'
 Plugin 'thinca/vim-qfreplace'
 Plugin 'thinca/vim-quickrun.git'
-Plugin 'todesking/ruby_hl_lvar.vim'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
@@ -42,6 +43,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-jp/vimdoc-ja'
 Plugin 'vim-scripts/AnsiEsc.vim'
+" Plugin 'todesking/ruby_hl_lvar.vim'
 
 call vundle#end()
 
@@ -51,27 +53,57 @@ syntax on
 filetype plugin indent on
 
 colorscheme hybrid
+
+set autoindent
+set expandtab
+set softtabstop=2
+set shiftwidth=2 
+set shiftround
+
+set backspace=indent,eol,start
+set hidden
+set laststatus=2
+set display=lastline
+
+set showmode
+set showcmd
+
+set incsearch
+set hlsearch
+set ignorecase
+set showmatch
+set smartcase
+
+set ttyfast
+set lazyredraw
+
+set splitbelow
+set splitright
+
+set cursorline
+set wrapscan
+set report =0
+set synmaxcol =200
+
+set list
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
+endif
+
+if &shell =~# 'fish$'
+  set shell=/bin/bash
+endif
+
 set clipboard=unnamed
 set wildmode=longest,list:longest
 set number
-set showcmd
-set hidden
 set visualbell t_vb=
-
-set expandtab
-set tabstop=2
-set shiftwidth=2 
-
-set hlsearch
-set ignorecase
-set incsearch
-set showmatch
-set smartcase
 
 set iminsert=0
 set imsearch=0
 
-set laststatus=2
 set statusline=%f\ %m%r%h%w
 set statusline+=\ [%{strlen(&fenc)?&fenc:&enc}][%{&fileformat}]
 set statusline+=%{fugitive#statusline()}
@@ -82,12 +114,16 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%* 
 set statusline+=\ %(%c:%l/%L%)\ %P
 
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pdf,*.dmg,*DS_Store*,*.app
-set wildignore+=*/Library/**,*/.rbenv/**,*/.Trash/**
-set wildignore+=.git,.sass-cache/,node_modules,*/vendor/bundle
+set backup
+set backupdir =$HOME/.vim/files/backup/
+set backupext =-vimbackup
+set backupskip = 
+set directory =$HOME/.vim/files/swap//
+set updatecount =100
+set viminfo ='100,n$HOME/.vim/files/info/viminfo
 
 if has('persistent_undo')
-  set undodir=~/.vim/undo
+  set undodir=$HOME/.vim/files/undo/
   set undofile
 endif
 
@@ -105,10 +141,6 @@ autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
 " riot tag
 autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
 
-" coffeescript
-" ------------------------------------------------------------------------------
-autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
-
 " git
 " ------------------------------------------------------------------------------
 autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git 
@@ -125,7 +157,6 @@ let g:markdown_fenced_languages = [
 " ------------------------------------------------------------------------------
 silent! map <unique> <Space>q <Plug>(quickrun)
 let g:quickrun_config = {}
-let g:quickrun_config['coffee'] = {'command': 'coffee', 'exec': ['%c -cbp %s']}
 
 " syntastic
 " ------------------------------------------------------------------------------
@@ -142,6 +173,7 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_scss_checkers = ['sassc']
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_javascript_checkers= ['eslint']
 
 " ctrlp
 " ------------------------------------------------------------------------------
@@ -170,11 +202,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
 " Easy align
 " ------------------------------------------------------------------------------
 vnoremap <silent> <Enter> :EasyAlign<cr>
-
-
-" Rsense
-" ------------------------------------------------------------------------------
-let g:rsenseHome = "/usr/local/Cellar/rsense/0.3/libexec"
 
 " keymap
 " ------------------------------------------------------------------------------
