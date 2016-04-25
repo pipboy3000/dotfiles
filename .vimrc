@@ -10,6 +10,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'ervandew/supertab'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'honza/vim-snippets'
@@ -53,6 +54,7 @@ syntax on
 filetype plugin indent on
 
 colorscheme hybrid
+set background=dark
 
 set autoindent
 set expandtab
@@ -75,7 +77,6 @@ set showmatch
 set smartcase
 
 set ttyfast
-set lazyredraw
 
 set splitbelow
 set splitright
@@ -134,6 +135,10 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+" PHP
+" ------------------------------------------------------------------------------
+autocmd BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
+
 " JavaScript
 " ------------------------------------------------------------------------------
 let javascript_enable_domhtmlcss = 1
@@ -169,11 +174,16 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0 
 let g:syntastic_enable_signs = 1
-let g:syntastic_loc_list_height = 5
+let g:syntastic_loc_list_height = 4
 let g:syntastic_scss_checkers = ['sassc']
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_javascript_checkers= ['eslint']
+
+if &diff
+  let g:syntastic_auto_loc_list = 0
+  let g:syntastic_check_on_open = 0
+endif
 
 " ctrlp
 " ------------------------------------------------------------------------------
@@ -190,14 +200,15 @@ endif
 
 " YCM
 " ------------------------------------------------------------------------------
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " ultisnips
 " ------------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<c-b>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Easy align
 " ------------------------------------------------------------------------------
@@ -221,5 +232,8 @@ vmap ,ob <Plug>(openbrowser-smart-search)
 
 " clear highlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" call Ag
+noremap ,ag :Ag
 
 " vim:set ft=vim et sw=2:
