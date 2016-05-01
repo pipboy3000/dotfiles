@@ -236,4 +236,10 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " call Ag
 noremap ,ag :Ag
 
+" colon
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 " vim:set ft=vim et sw=2:

@@ -49,6 +49,10 @@ if [ -f ~/.aws/blog ]; then
     source ~/.aws/blog
 fi
 
+if [ -f ~/.config/homebrew_token ]; then
+  source ~/.config/homebrew_token
+fi
+
 ### home bin
 export PATH="/Users/count0/bin:$PATH"
 

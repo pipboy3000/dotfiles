@@ -1,29 +1,26 @@
 [user]
-	name = Asai Masami
-	email = shakeforme@gmail.com
+  name = Asai Masami
+  email = shakeforme@gmail.com
 [color]
-	ui = auto
+  ui = auto
 [core]
-	excludesfile = /Users/count0/.gitignore_global
-[github]
-	token = cfe4e22192fb434b98bccded81bee733
-	user = pipboy3000
+  excludesfile = /Users/count0/.gitignore_global
 [filter "media"]
-	required = true
-	clean = git media clean %f
-	smudge = git media smudge %f
+  required = true
+  clean = git media clean %f
+  smudge = git media smudge %f
 [filter "hawser"]
-	clean = git hawser clean %f
-	smudge = git hawser smudge %f
-	required = true
+  clean = git hawser clean %f
+  smudge = git hawser smudge %f
+  required = true
 [filter "lfs"]
-	clean = git lfs clean %f
-	smudge = git lfs smudge %f
-	required = true
+  clean = git lfs clean %f
+  smudge = git lfs smudge %f
+  required = true
 [merge]
-	tool = vimdiff
+  tool = vimdiff
 [push]
-	default = simple
+  default = simple
 [alias]
   log-graph = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   s = status
