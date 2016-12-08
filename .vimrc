@@ -10,41 +10,45 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'ervandew/supertab'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ervandew/supertab'
+Plugin 'editorconfig/editorconfig-vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-smartinput'
 Plugin 'kana/vim-textobj-user'
-Plugin 'kchmck/vim-coffee-script'
+" Plugin 'kchmck/vim-coffee-script'
 Plugin 'lambdalisue/vim-gista'
-Plugin 'leafgarland/typescript-vim'
+" Plugin 'leafgarland/typescript-vim'
 Plugin 'mattn/emmet-vim'
 Plugin 'mattn/jscomplete-vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'myhere/vim-nodejs-complete'
-Plugin 'nicklasos/vim-jsx-riot'
+" Plugin 'nicklasos/vim-jsx-riot'
 Plugin 'open-browser.vim'
-Plugin 'pangloss/vim-javascript'
 Plugin 'rhysd/vim-textobj-ruby'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'SirVer/ultisnips'
 Plugin 'slim-template/vim-slim'
-Plugin 'terryma/vim-expand-region'
 Plugin 'thinca/vim-qfreplace'
 Plugin 'thinca/vim-quickrun.git'
 Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-jp/vimdoc-ja'
-Plugin 'vim-scripts/AnsiEsc.vim'
+Plugin 'Yggdroot/indentLine'
 " Plugin 'todesking/ruby_hl_lvar.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'myhere/vim-nodejs-complete'
+Plugin 'othree/yajs.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'elzr/vim-json'
+Plugin 'gko/vim-coloresque'
 
 call vundle#end()
 
@@ -81,10 +85,10 @@ set ttyfast
 set splitbelow
 set splitright
 
-set cursorline
+" set cursorline
 set wrapscan
 set report =0
-set synmaxcol =200
+" set synmaxcol =200
 
 set list
 if has('multi_byte') && &encoding ==# 'utf-8'
@@ -116,12 +120,11 @@ set statusline+=%*
 set statusline+=\ %(%c:%l/%L%)\ %P
 
 set backup
-set backupdir =$HOME/.vim/files/backup/
-set backupext =-vimbackup
-set backupskip = 
-set directory =$HOME/.vim/files/swap//
-set updatecount =100
-set viminfo ='100,n$HOME/.vim/files/info/viminfo
+set backupdir=$HOME/.vim/files/backup/
+set backupext=-vimbackup
+set backupskip= 
+set directory=$HOME/.vim/files/swap//
+set updatecount=100
 
 if has('persistent_undo')
   set undodir=$HOME/.vim/files/undo/
@@ -144,17 +147,22 @@ autocmd BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
 let javascript_enable_domhtmlcss = 1
 autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
 " riot tag
-autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
+" autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
+autocmd BufNewFile,BufRead *.ejs set filetype=html
+
+" JSON
+" ------------------------------------------------------------------------------
+let g:vim_json_syntax_conceal = 0
 
 " git
 " ------------------------------------------------------------------------------
-autocmd BufRead,BufNewFile COMMIT_EDITMSG setf git 
+autocmd BufRead,BufNewFile COMMIT_EDITMSG setf=git
 
 " markdown
 " ------------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *.markdown,*.md set ft=markdown
 let g:markdown_fenced_languages = [
-      \  'coffee', 'css', 'erb=eruby', 'js=javascript', 'json=javascript', 'ruby',
+      \  'css', 'erb=eruby', 'js=javascript', 'json=javascript', 'ruby',
       \  'sass', 'xml', 'html'
       \]
 
@@ -167,8 +175,8 @@ let g:quickrun_config = {}
 " ------------------------------------------------------------------------------
 let g:syntastic_mode_map = {
   \ "mode": "active",
-  \ "active_filetypes": [],
-  \ "passive_filetypes": ['ruby'] }
+  \ "active_filetypes": ['ruby'],
+  \ "passive_filetypes": [] }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1 
 let g:syntastic_check_on_open = 1
@@ -190,7 +198,7 @@ endif
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_extensions = ['dir', 'quickfix', 'mixed']
+let g:ctrlp_extensions = ['quickfix', 'mixed']
 let g:ctrlp_open_multiple_files = '2hi'
 let g:ctrlp_prompt_mappings = { 'MarkToOpen()': ['<c-@>'] }
 if executable('ag')
@@ -203,12 +211,13 @@ endif
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 " ultisnips
 " ------------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsExpandTrigger = "<tab>"
+" let g:UltiSnipsJumpForwardTrigger = "<tab>"
+" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Easy align
 " ------------------------------------------------------------------------------
