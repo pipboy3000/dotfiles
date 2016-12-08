@@ -1,7 +1,7 @@
 export CLICOLOR=1
 TERM=xterm-256color
 
-#alias less=lv
+alias less='less -R'
 alias ls='ls -GAFvh'
 alias ll="ls -l"
 alias la="ls -a"
@@ -11,11 +11,12 @@ alias mv='mv -iv'
 alias grep='grep --color'
 alias f='open .'
 alias git=hub
-alias mount_pi2='sshfs pi@raspberrypi2.local:/home/pi ~/Desktop/mnt/'
+alias v='v -l'
+alias python='python3'
+alias pip='pip3'
 
 export HISTCONTROL=ignoreboth:erasedups
 export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin
 export PATH=$PATH:~/.composer/vendor/bin
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
@@ -32,10 +33,13 @@ set -o posix
 # Make bash check it's window size after a process complete
 shopt -s checkwinsize
 
+### rbenv
 eval "$(rbenv init -)"
 
+### node
 export NODE_PATH="/usr/local/lib/node_modules"
 
+### z
 . `brew --prefix`/etc/profile.d/z.sh
 function precmd() {
     z --add "$(pwd -P)"
@@ -49,6 +53,7 @@ if [ -f ~/.aws/blog ]; then
     source ~/.aws/blog
 fi
 
+### homebrew
 if [ -f ~/.config/homebrew_token ]; then
   source ~/.config/homebrew_token
 fi
@@ -56,7 +61,7 @@ fi
 ### home bin
 export PATH="/Users/count0/bin:$PATH"
 
-# get current branch in git repo
+### get current branch in git repo
 function parse_git_branch() {
 	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 	if [ ! "${BRANCH}" == "" ]
@@ -68,7 +73,7 @@ function parse_git_branch() {
 	fi
 }
 
-# get current status of git repo
+### get current status of git repo
 function parse_git_dirty {
 	status=`git status 2>&1 | tee`
 	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
@@ -103,6 +108,10 @@ function parse_git_dirty {
 	fi
 }
 
+### gitignore.io
+function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
+
+### prompt
 export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]:\w \[\e[34;40m\]\`parse_git_branch\`\[\e[m\]\n\\$ "
 
 # GOLANG
