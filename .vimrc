@@ -46,9 +46,12 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'pangloss/vim-javascript'
 Plugin 'myhere/vim-nodejs-complete'
 Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
+Plugin 'MaxMEllon/vim-jsx-pretty'
 Plugin 'elzr/vim-json'
 Plugin 'gko/vim-coloresque'
+Plugin 'digitaltoad/vim-pug'
+Plugin 'mtscout6/syntastic-local-eslint.vim'
+Plugin 'kewah/vim-stylefmt'
 
 call vundle#end()
 
@@ -175,18 +178,20 @@ let g:quickrun_config = {}
 " ------------------------------------------------------------------------------
 let g:syntastic_mode_map = {
   \ "mode": "active",
-  \ "active_filetypes": ['ruby'],
-  \ "passive_filetypes": [] }
+  \ "active_filetypes": ['ruby', 'javascript'] }
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1 
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0 
 let g:syntastic_enable_signs = 1
 let g:syntastic_loc_list_height = 4
-let g:syntastic_scss_checkers = ['sassc']
+let g:syntastic_scss_checkers = ['stylelint', 'sassc']
 let g:syntastic_ruby_checkers = ['rubocop']
 let g:syntastic_html_tidy_exec = 'tidy5'
 let g:syntastic_javascript_checkers= ['eslint']
+let g:syntastic_markdown_checkers = ['textlint']
+let g:syntastic_text_checkers = ['textlint']
+let g:syntastic_python_checkers = ['pep8']
 
 if &diff
   let g:syntastic_auto_loc_list = 0
@@ -250,5 +255,9 @@ nnoremap ; :
 nnoremap : ;
 vnoremap ; :
 vnoremap : ;
+
+" Input Method
+:inoremap <ESC> <ESC>:set iminsert=0<CR>
+:inoremap <C-c> <C-c>:set iminsert=0<CR>
 
 " vim:set ft=vim et sw=2:
