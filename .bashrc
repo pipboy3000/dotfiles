@@ -14,10 +14,13 @@ alias git=hub
 alias v='v -l'
 alias python='python3'
 alias pip='pip3'
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 
 export HISTCONTROL=ignoreboth:erasedups
-export PATH="~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin"
+export PATH=~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin
 export PATH=$PATH:~/.composer/vendor/bin
+export PATH="$PATH:`yarn global bin`"
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
 export LANG=ja_JP.UTF-8

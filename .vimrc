@@ -2,64 +2,53 @@
 " vimrc
 " ==============================================================================
 
-" Vundle
+" vim-plug
 " ------------------------------------------------------------------------------
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'airblade/vim-gitgutter'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'ervandew/supertab'
-Plugin 'editorconfig/editorconfig-vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'honza/vim-snippets'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'kana/vim-smartinput'
-Plugin 'kana/vim-textobj-user'
-" Plugin 'kchmck/vim-coffee-script'
-Plugin 'lambdalisue/vim-gista'
-" Plugin 'leafgarland/typescript-vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'mattn/jscomplete-vim'
-" Plugin 'nicklasos/vim-jsx-riot'
-Plugin 'open-browser.vim'
-Plugin 'rhysd/vim-textobj-ruby'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/syntastic'
-Plugin 'SirVer/ultisnips'
-Plugin 'slim-template/vim-slim'
-Plugin 'thinca/vim-qfreplace'
-Plugin 'thinca/vim-quickrun.git'
-Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-fugitive'
-" Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sensible'
-Plugin 'tpope/vim-surround'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'vim-jp/vimdoc-ja'
-Plugin 'Yggdroot/indentLine'
-" Plugin 'todesking/ruby_hl_lvar.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'myhere/vim-nodejs-complete'
-Plugin 'othree/yajs.vim'
-Plugin 'MaxMEllon/vim-jsx-pretty'
-Plugin 'elzr/vim-json'
-Plugin 'gko/vim-coloresque'
-Plugin 'digitaltoad/vim-pug'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
-Plugin 'kewah/vim-stylefmt'
-
-call vundle#end()
+call plug#begin('~/.vim/bundle')
+Plug 'airblade/vim-gitgutter'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'junegunn/vim-easy-align'
+Plug 'kana/vim-smartinput'
+Plug 'kana/vim-textobj-user'
+" Plug 'leafgarland/typescript-vim'
+Plug 'w0rp/ale'
+Plug 'mattn/emmet-vim'
+Plug 'mattn/jscomplete-vim'
+Plug 'tyru/open-browser.vim'
+Plug 'rhysd/vim-textobj-ruby'
+Plug 'rking/ag.vim'
+Plug 'slim-template/vim-slim'
+Plug 'thinca/vim-qfreplace'
+Plug 'thinca/vim-quickrun'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'vim-jp/vimdoc-ja'
+Plug 'Yggdroot/indentLine'
+" Plug 'todesking/ruby_hl_lvar.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'myhere/vim-nodejs-complete'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
+" Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'elzr/vim-json'
+Plug 'gko/vim-coloresque'
+Plug 'digitaltoad/vim-pug'
+Plug 'kewah/vim-stylefmt'
+Plug 'posva/vim-vue'
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+call plug#end()
 
 " config
 " ------------------------------------------------------------------------------
-syntax on
-filetype plugin indent on
-
 colorscheme hybrid
 set background=dark
 
@@ -106,8 +95,8 @@ endif
 
 set clipboard=unnamed
 set wildmode=longest,list:longest
-set number
 set visualbell t_vb=
+set complete=.,b,u,]
 
 set iminsert=0
 set imsearch=0
@@ -118,7 +107,7 @@ set statusline+=%{fugitive#statusline()}
 set statusline+=\ %{strlen(&ft)?&ft:'none'}
 set statusline+=%=
 set statusline+=%#warningmsg# 
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%{ALEGetStatusLine()}
 set statusline+=%* 
 set statusline+=\ %(%c:%l/%L%)\ %P
 
@@ -145,12 +134,15 @@ endif
 " ------------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
 
+" CSS
+" ------------------------------------------------------------------------------
+" autocmd BufWritePre *.css :Stylefmt
+" autocmd BufWritePre *.scss :Stylefmt
+
 " JavaScript
 " ------------------------------------------------------------------------------
 let javascript_enable_domhtmlcss = 1
-autocmd FileType javascript setlocal omnifunc=nodejscomplete#CompleteJS
-" riot tag
-" autocmd BufNewFile,BufRead *.tag setlocal ft=javascript
+let g:javascript_plugin_jsdoc = 1
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 
 " JSON
@@ -174,29 +166,13 @@ let g:markdown_fenced_languages = [
 silent! map <unique> <Space>q <Plug>(quickrun)
 let g:quickrun_config = {}
 
-" syntastic
+" ALE
 " ------------------------------------------------------------------------------
-let g:syntastic_mode_map = {
-  \ "mode": "active",
-  \ "active_filetypes": ['ruby', 'javascript'] }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1 
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0 
-let g:syntastic_enable_signs = 1
-let g:syntastic_loc_list_height = 4
-let g:syntastic_scss_checkers = ['stylelint', 'sassc']
-let g:syntastic_ruby_checkers = ['rubocop']
-let g:syntastic_html_tidy_exec = 'tidy5'
-let g:syntastic_javascript_checkers= ['eslint']
-let g:syntastic_markdown_checkers = ['textlint']
-let g:syntastic_text_checkers = ['textlint']
-let g:syntastic_python_checkers = ['pep8']
-
-if &diff
-  let g:syntastic_auto_loc_list = 0
-  let g:syntastic_check_on_open = 0
-endif
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+let g:ale_open_list = 1
+let g:ale_ruby_rubocop_executable = 'bundle exec rubocop'
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 
 " ctrlp
 " ------------------------------------------------------------------------------
@@ -208,21 +184,15 @@ let g:ctrlp_open_multiple_files = '2hi'
 let g:ctrlp_prompt_mappings = { 'MarkToOpen()': ['<c-@>'] }
 if executable('ag')
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup -g ""'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 endif
 
-" YCM
+" UltiSnips
 " ------------------------------------------------------------------------------
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-" ultisnips
-" ------------------------------------------------------------------------------
-" let g:UltiSnipsExpandTrigger = "<tab>"
-" let g:UltiSnipsJumpForwardTrigger = "<tab>"
-" let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+" let g:UltiSnipsExpandTrigger="<tab>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" let g:UltiSnipsEditSplit="vertical"
 
 " Easy align
 " ------------------------------------------------------------------------------
@@ -250,14 +220,12 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " call Ag
 noremap ,ag :Ag
 
-" colon
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
-
 " Input Method
 :inoremap <ESC> <ESC>:set iminsert=0<CR>
 :inoremap <C-c> <C-c>:set iminsert=0<CR>
+
+" ALE move
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " vim:set ft=vim et sw=2:
