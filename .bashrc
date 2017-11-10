@@ -121,3 +121,7 @@ export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]:\w \[\e[34;40m\]\`parse_gi
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 complete -C '/usr/local/bin/aws_completer' aws
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

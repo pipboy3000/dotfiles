@@ -7,82 +7,83 @@
 
 call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'flazz/vim-colorschemes'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-smartinput'
 Plug 'kana/vim-textobj-user'
-" Plug 'leafgarland/typescript-vim'
 Plug 'w0rp/ale'
 Plug 'mattn/emmet-vim'
 Plug 'mattn/jscomplete-vim'
 Plug 'tyru/open-browser.vim'
 Plug 'rhysd/vim-textobj-ruby'
-Plug 'rking/ag.vim'
 Plug 'slim-template/vim-slim'
 Plug 'thinca/vim-qfreplace'
 Plug 'thinca/vim-quickrun'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
-" Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'Yggdroot/indentLine'
-" Plug 'todesking/ruby_hl_lvar.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'myhere/vim-nodejs-complete'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
-" Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'elzr/vim-json'
 Plug 'gko/vim-coloresque'
 Plug 'digitaltoad/vim-pug'
 Plug 'kewah/vim-stylefmt'
-Plug 'posva/vim-vue'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
-" Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+Plug 'Shougo/context_filetype.vim'
+Plug 'osyo-manga/vim-precious'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " config
 " ------------------------------------------------------------------------------
 colorscheme hybrid
-set background=dark
-
+" set cursorline
+" set synmaxcol =200
 set autoindent
-set expandtab
-set softtabstop=2
-set shiftwidth=2 
-set shiftround
-
+set background=dark
 set backspace=indent,eol,start
-set hidden
-set laststatus=2
+set backup
+set backupdir=$HOME/.vim/files/backup/
+set backupext=-vimbackup
+set backupskip= 
+set clipboard=unnamed
+set complete=.,b,u,]
+set completeopt=menu,preview
+set directory=$HOME/.vim/files/swap/
 set display=lastline
-
-set showmode
-set showcmd
-
-set incsearch
+set expandtab
+set hidden
 set hlsearch
 set ignorecase
+set iminsert=0
+set imsearch=0
+set incsearch
+set laststatus=2
+set list
+set report =0
+set shiftround
+set shiftwidth=2 
+set showcmd
 set showmatch
+set showmode
 set smartcase
-
-set ttyfast
-
+set softtabstop=2
 set splitbelow
 set splitright
-
-" set cursorline
+set ttyfast
+set updatecount=100
+set visualbell t_vb=
+set wildmode=longest,list:longest
 set wrapscan
-set report =0
-" set synmaxcol =200
 
-set list
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
@@ -92,31 +93,6 @@ endif
 if &shell =~# 'fish$'
   set shell=/bin/bash
 endif
-
-set clipboard=unnamed
-set wildmode=longest,list:longest
-set visualbell t_vb=
-set complete=.,b,u,]
-
-set iminsert=0
-set imsearch=0
-
-set statusline=%f\ %m%r%h%w
-set statusline+=\ [%{strlen(&fenc)?&fenc:&enc}][%{&fileformat}]
-set statusline+=%{fugitive#statusline()}
-set statusline+=\ %{strlen(&ft)?&ft:'none'}
-set statusline+=%=
-set statusline+=%#warningmsg# 
-set statusline+=%{ALEGetStatusLine()}
-set statusline+=%* 
-set statusline+=\ %(%c:%l/%L%)\ %P
-
-set backup
-set backupdir=$HOME/.vim/files/backup/
-set backupext=-vimbackup
-set backupskip= 
-set directory=$HOME/.vim/files/swap//
-set updatecount=100
 
 if has('persistent_undo')
   set undodir=$HOME/.vim/files/undo/
@@ -128,6 +104,9 @@ if &term =~ '256color'
   " render properly when inside 256-color tmux and GNU screen.
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
+endif
+
+if !has('gui_ranning')
 endif
 
 " PHP
@@ -161,47 +140,94 @@ let g:markdown_fenced_languages = [
       \  'sass', 'xml', 'html'
       \]
 
-" quickrun
+" Vue
 " ------------------------------------------------------------------------------
-silent! map <unique> <Space>q <Plug>(quickrun)
-let g:quickrun_config = {}
+autocmd BufNewFile,BufRead *.vue set filetype=vue
 
 " ALE
 " ------------------------------------------------------------------------------
+let g:ale_open_list = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
-let g:ale_open_list = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter = 0
 let g:ale_ruby_rubocop_executable = 'bundle exec rubocop'
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+let g:ale_linters = {
+\   'javascript': ['prettier'],
+\   'scss': ['sasslint'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'scss': ['prettier'],
+\}
 
-" ctrlp
+" FZF
 " ------------------------------------------------------------------------------
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_extensions = ['quickfix', 'mixed']
-let g:ctrlp_open_multiple_files = '2hi'
-let g:ctrlp_prompt_mappings = { 'MarkToOpen()': ['<c-@>'] }
-if executable('ag')
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-endif
+let g:fzf_buffers_jump = 1
+let g:fzf_tags_command = 'ctags -R'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
-" UltiSnips
+" context filetype
 " ------------------------------------------------------------------------------
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" let g:UltiSnipsEditSplit="vertical"
+let g:context_filetype#filetypes = {
+\  'vue': [
+\    {
+\      'start': "<template lang='pug'>",
+\      'end': '</template>',
+\      'filetype': 'pug'
+\    },
+\   {
+\    'start':
+\     '<template\%( [^>]*\)\?>',
+\    'end': '</template>', 'filetype': 'html',
+\   },
+\   {
+\    'start':
+\     '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+\    'end': '</script>', 'filetype': 'typescript',
+\   },
+\   {
+\    'start':
+\     '<script\%( [^>]*\)\?>',
+\    'end': '</script>', 'filetype': 'javascript',
+\   },
+\   {
+\    'start':
+\     '<style\%( [^>]*\)\?>',
+\    'end': '</style>', 'filetype': 'css',
+\   },
+\  ]
+\}
 
-" Easy align
+" lightline
 " ------------------------------------------------------------------------------
-vnoremap <silent> <Enter> :EasyAlign<cr>
+set noshowmode
+let g:lightline = {
+\  'colorscheme': 'PaperColor_dark',
+\  'active': {
+\    'left': [ ['mode', 'paste'],
+\              ['gitbranch', 'readonly', 'filename', 'modified'] ],
+\    'right': [ ['ale', 'lineinfo'],
+\             ['percent'],
+\             ['fileformat', 'fileencoding', 'filetype'] ]
+\  },
+\  'component_function': {
+\    'gitbranch': 'fugitive#statusline',
+\    'ale': 'ALEGetStatusLine',
+\    'readonly': 'LightLineReadonly'
+\  }
+\}
+
+function! LightLineReadonly()
+  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+endfunction
 
 " keymap
 " ------------------------------------------------------------------------------
-imap jj <ESC>
+let mapleader = ','
 
+imap jj <ESC>
 noremap j gj
 noremap k gk
 vnoremap j gj
@@ -211,21 +237,31 @@ vnoremap k gk
 nnoremap <Space>s. :<C-u>source ~/.vimrc<CR>
 
 " open browser
-nmap ,ob <Plug>(openbrowser-smart-search)
-vmap ,ob <Plug>(openbrowser-smart-search)
+nmap <leader>ob <Plug>(openbrowser-smart-search)
+vmap <leader>ob <Plug>(openbrowser-smart-search)
 
 " clear highlight
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-
-" call Ag
-noremap ,ag :Ag
 
 " Input Method
 :inoremap <ESC> <ESC>:set iminsert=0<CR>
 :inoremap <C-c> <C-c>:set iminsert=0<CR>
 
+" Easy align
+vnoremap <silent> <Enter> :EasyAlign<cr>
+
 " ALE move
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
+" FZF
+nmap ; :Buffers<CR>
+nmap <leader>t :Files<CR>
+nmap <leader>r :Tags<CR>
+nmap <leader>a :Ag<CR>
+nmap <leader>h :History<CR>
+
+" quickrun
+silent! map <unique> <Space>q <Plug>(quickrun)
 
 " vim:set ft=vim et sw=2:
