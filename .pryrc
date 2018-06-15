@@ -1,11 +1,4 @@
 begin
-  require 'awesome_print'
-  Pry.config.print = proc { |output, value| output.puts value.ai }
-rescue LoadError
-  puts 'no awesome print :('
-end
-
-begin
   require 'hirb'
 rescue LoadError
   puts 'no hirb :('

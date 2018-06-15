@@ -7,16 +7,30 @@
 
 call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
+Plug 'arcticicestudio/nord-vim'
+Plug 'digitaltoad/vim-pug'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'elzr/vim-json'
 Plug 'flazz/vim-colorschemes'
+Plug 'gko/vim-coloresque'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'kana/vim-smartinput'
 Plug 'kana/vim-textobj-user'
-Plug 'w0rp/ale'
+Plug 'kewah/vim-stylefmt'
+Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'mattn/emmet-vim'
 Plug 'mattn/jscomplete-vim'
-Plug 'tyru/open-browser.vim'
+Plug 'myhere/vim-nodejs-complete'
+Plug 'osyo-manga/vim-precious'
+Plug 'othree/es.next.syntax.vim'
+Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
 Plug 'rhysd/vim-textobj-ruby'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/context_filetype.vim'
 Plug 'slim-template/vim-slim'
 Plug 'thinca/vim-qfreplace'
 Plug 'thinca/vim-quickrun'
@@ -25,31 +39,17 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
+Plug 'w0rp/ale'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
-Plug 'pangloss/vim-javascript'
-Plug 'myhere/vim-nodejs-complete'
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'elzr/vim-json'
-Plug 'gko/vim-coloresque'
-Plug 'digitaltoad/vim-pug'
-Plug 'kewah/vim-stylefmt'
-Plug 'Shougo/context_filetype.vim'
-Plug 'osyo-manga/vim-precious'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " config
 " ------------------------------------------------------------------------------
-colorscheme hybrid
-" set cursorline
-" set synmaxcol =200
-set autoindent
+colorscheme nord
 set background=dark
-set backspace=indent,eol,start
 set backup
 set backupdir=$HOME/.vim/files/backup/
 set backupext=-vimbackup
@@ -58,7 +58,6 @@ set clipboard=unnamed
 set complete=.,b,u,]
 set completeopt=menu,preview
 set directory=$HOME/.vim/files/swap/
-set display=lastline
 set expandtab
 set hidden
 set hlsearch
@@ -66,7 +65,6 @@ set ignorecase
 set iminsert=0
 set imsearch=0
 set incsearch
-set laststatus=2
 set list
 set report =0
 set shiftround
@@ -90,10 +88,6 @@ else
   let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
 
-if &shell =~# 'fish$'
-  set shell=/bin/bash
-endif
-
 if has('persistent_undo')
   set undodir=$HOME/.vim/files/undo/
   set undofile
@@ -104,9 +98,6 @@ if &term =~ '256color'
   " render properly when inside 256-color tmux and GNU screen.
   " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
   set t_ut=
-endif
-
-if !has('gui_ranning')
 endif
 
 " PHP
@@ -147,19 +138,19 @@ autocmd BufNewFile,BufRead *.vue set filetype=vue
 " ALE
 " ------------------------------------------------------------------------------
 let g:ale_open_list = 1
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
-let g:ale_ruby_rubocop_executable = 'bundle exec rubocop'
+let g:airline#extensions#ale#enabled = 1
 let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
 let g:ale_linters = {
 \   'javascript': ['prettier'],
 \   'scss': ['sasslint'],
+\   'ruby': ['rubocop'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'scss': ['prettier'],
+\   'ruby': ['rubocop'],
 \}
 
 " FZF
@@ -168,43 +159,19 @@ let g:fzf_buffers_jump = 1
 let g:fzf_tags_command = 'ctags -R'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
-" context filetype
+" vim-precious
 " ------------------------------------------------------------------------------
-let g:context_filetype#filetypes = {
-\  'vue': [
-\    {
-\      'start': "<template lang='pug'>",
-\      'end': '</template>',
-\      'filetype': 'pug'
-\    },
-\   {
-\    'start':
-\     '<template\%( [^>]*\)\?>',
-\    'end': '</template>', 'filetype': 'html',
-\   },
-\   {
-\    'start':
-\     '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
-\    'end': '</script>', 'filetype': 'typescript',
-\   },
-\   {
-\    'start':
-\     '<script\%( [^>]*\)\?>',
-\    'end': '</script>', 'filetype': 'javascript',
-\   },
-\   {
-\    'start':
-\     '<style\%( [^>]*\)\?>',
-\    'end': '</style>', 'filetype': 'css',
-\   },
-\  ]
+let g:precious_enable_switchers = {
+\  "eruby": {
+\    "setfiletype": 0
+\  }
 \}
 
 " lightline
 " ------------------------------------------------------------------------------
 set noshowmode
 let g:lightline = {
-\  'colorscheme': 'PaperColor_dark',
+\  'colorscheme': 'nord',
 \  'active': {
 \    'left': [ ['mode', 'paste'],
 \              ['gitbranch', 'readonly', 'filename', 'modified'] ],
@@ -213,15 +180,20 @@ let g:lightline = {
 \             ['fileformat', 'fileencoding', 'filetype'] ]
 \  },
 \  'component_function': {
-\    'gitbranch': 'fugitive#statusline',
+\    'gitbranch': 'FugitiveStatusline',
 \    'ale': 'ALEGetStatusLine',
 \    'readonly': 'LightLineReadonly'
 \  }
 \}
 
 function! LightLineReadonly()
-  return &readonly && &filetype !=# 'help' ? 'RO' : ''
+  return &readonly && &filetype !~? 'help\|vimfiler' ? 'RO' : ''
 endfunction
+
+" nord
+" ------------------------------------------------------------------------------
+let g:nord_uniform_status_lines = 1
+let g:nord_uniform_diff_background = 1
 
 " keymap
 " ------------------------------------------------------------------------------
@@ -240,9 +212,6 @@ nnoremap <Space>s. :<C-u>source ~/.vimrc<CR>
 nmap <leader>ob <Plug>(openbrowser-smart-search)
 vmap <leader>ob <Plug>(openbrowser-smart-search)
 
-" clear highlight
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-
 " Input Method
 :inoremap <ESC> <ESC>:set iminsert=0<CR>
 :inoremap <C-c> <C-c>:set iminsert=0<CR>
@@ -259,7 +228,14 @@ nmap ; :Buffers<CR>
 nmap <leader>t :Files<CR>
 nmap <leader>r :Tags<CR>
 nmap <leader>a :Ag<CR>
+nmap <leader>A :Ag!<CR>
 nmap <leader>h :History<CR>
+nmap <leader>g :GFiles?<CR>
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 " quickrun
 silent! map <unique> <Space>q <Plug>(quickrun)

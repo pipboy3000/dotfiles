@@ -2,7 +2,7 @@ source ~/.bashrc
 
 ### completion
 if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
+  . `brew --prefix`/etc/bash_completion
 fi
 
 if [ -f ~/.rbenv/completions/rbenv.bash ]; then
@@ -18,3 +18,5 @@ if [ -f '/Users/count0/google-cloud-sdk/path.bash.inc' ]; then source '/Users/co
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/count0/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/count0/google-cloud-sdk/completion.bash.inc'; fi
+
+export PATH="/usr/local/opt/node@8/bin:$PATH"

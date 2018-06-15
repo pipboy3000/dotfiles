@@ -4,7 +4,7 @@
 [color]
   ui = auto
 [core]
-  excludesfile = /Users/count0/.gitignore_global
+  excludesfile = ~/.gitignore_global
 	quotepath = false
 [filter "media"]
   required = true
@@ -24,7 +24,7 @@
   default = simple
 [alias]
   log-graph = log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-  s = status
+  s = status --short --branch
   d = diff HEAD
   d1 = diff HEAD^
   d2 = diff HEAD^^
@@ -32,3 +32,6 @@
   d4 = diff HEAD^^^^
   d5 = diff HEAD^^^^^
   fetch-pulls = fetch origin + refs/pull*:refs/remotes/pull/*
+  merged-branch = branch --merged
+[init]
+	templatedir = ~/.git_template
