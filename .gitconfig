@@ -35,3 +35,6 @@
   merged-branch = branch --merged
 [init]
 	templatedir = ~/.git_template
+[pager]
+  diff = diff-so-fancy | less --tabs=1,5 -RFX
+  show = diff-so-fancy | less --tabs=1,5 -RFX

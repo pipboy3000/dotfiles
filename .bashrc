@@ -12,21 +12,27 @@ alias grep='grep --color'
 alias f='open .'
 alias git=hub
 alias v='v -l'
+alias cat='bat'
+alias ping='prettyping --nolegend'
+alias preview="fzf --preview 'bat --color \"always\" {}'"
+alias top="sudo htop" # alias top and fix high sierra bug
+alias du="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias help='tldr'
 alias python='python3'
 alias pip='pip3'
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
 
 export HISTCONTROL=ignoreboth:erasedups
-export PATH=~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/X11R6/bin
+export PATH=~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
 export PATH=$PATH:~/.composer/vendor/bin
 export PATH="$PATH:`yarn global bin`"
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
 export LANG=ja_JP.UTF-8
 export EDITOR=vim
-export PAGER=lv
-export GIT_PAGER='lv -c'
+#export PAGER=lv
+#export GIT_PAGER='lv -c'
 export PS1="\u@\h[\w]\$"
 
 umask 22
@@ -123,6 +129,8 @@ export PATH=$PATH:$GOPATH/bin
 complete -C '/usr/local/bin/aws_completer' aws
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# add support for ctrl+o to open selected file in VS Code
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
