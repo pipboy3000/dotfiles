@@ -1,16 +1,19 @@
-" ==============================================================================
+" ============================================================================
 " vimrc
-" ==============================================================================
+" ============================================================================
 
 " vim-plug
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 
 call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'ElmCast/elm-vim'
 Plug 'elzr/vim-json'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'flazz/vim-colorschemes'
 Plug 'gko/vim-coloresque'
 Plug 'itchyny/lightline.vim'
@@ -44,12 +47,10 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
-Plug 'ElmCast/elm-vim'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 " config
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 colorscheme nord
 set background=dark
 set backup
@@ -95,38 +96,31 @@ if has('persistent_undo')
   set undofile
 endif
 
-if &term =~ '256color'
-  " disable Background Color Erase (BCE) so that color schemes
-  " render properly when inside 256-color tmux and GNU screen.
-  " see also http://snk.tuxfamily.org/log/vim-256color-bce.html
-  set t_ut=
-endif
-
 " PHP
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *.php setlocal tabstop=4 shiftwidth=4
 
 " CSS
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 " autocmd BufWritePre *.css :Stylefmt
 " autocmd BufWritePre *.scss :Stylefmt
 
 " JavaScript
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let javascript_enable_domhtmlcss = 1
 let g:javascript_plugin_jsdoc = 1
 autocmd BufNewFile,BufRead *.ejs set filetype=html
 
 " JSON
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let g:vim_json_syntax_conceal = 0
 
 " git
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 autocmd BufRead,BufNewFile COMMIT_EDITMSG setf=git
 
 " markdown
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *.markdown,*.md set ft=markdown
 let g:markdown_fenced_languages = [
       \  'css', 'erb=eruby', 'js=javascript', 'json=javascript', 'ruby',
@@ -134,11 +128,11 @@ let g:markdown_fenced_languages = [
       \]
 
 " Vue
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *.vue set filetype=vue
 
 " ALE
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let g:ale_open_list = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
@@ -156,21 +150,34 @@ let g:ale_fixers = {
 \}
 
 " FZF
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let g:fzf_buffers_jump = 1
 let g:fzf_tags_command = 'ctags -R'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 " vim-precious
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let g:precious_enable_switchers = {
-\  "eruby": {
-\    "setfiletype": 0
-\  }
+\  "*": {
+\    "setfiletype": 0,
+\    "outer_region": 0
+\  },
+\  "vue": {
+\    "setfiletype": 1,
+\    "outer_region": 1
+\  },
+\  "html": {
+\    "setfiletype": 1,
+\    "outer_region": 1
+\  },
+\  "markdown": {
+\    "setfiletype": 1,
+\    "outer_region": 1
+\  },
 \}
 
 " lightline
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 set noshowmode
 let g:lightline = {
 \  'colorscheme': 'nord',
@@ -193,12 +200,12 @@ function! LightLineReadonly()
 endfunction
 
 " nord
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let g:nord_uniform_status_lines = 1
 let g:nord_uniform_diff_background = 1
 
 " keymap
-" ------------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 let mapleader = ','
 
 imap jj <ESC>

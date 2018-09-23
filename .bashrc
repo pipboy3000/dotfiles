@@ -1,6 +1,3 @@
-export CLICOLOR=1
-TERM=xterm-256color
-
 alias less='less -R'
 alias ls='ls -GAFvh'
 alias ll="ls -l"
