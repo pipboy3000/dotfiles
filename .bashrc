@@ -127,8 +127,8 @@ complete -C '/usr/local/bin/aws_completer' aws
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # add support for ctrl+o to open selected file in VS Code
-export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort'"
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_OPTS="--bind='ctrl-o:execute(code {})+abort' --inline-info"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --smart-case'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # tabtab source for serverless package
@@ -137,3 +137,13 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+###-tns-completion-start-###
+if [ -f /Users/count0/.tnsrc ]; then 
+    source /Users/count0/.tnsrc 
+fi
+###-tns-completion-end-###

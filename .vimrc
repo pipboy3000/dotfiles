@@ -7,13 +7,11 @@
 
 call plug#begin('~/.vim/bundle')
 Plug 'airblade/vim-gitgutter'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ElmCast/elm-vim'
 Plug 'elzr/vim-json'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'flazz/vim-colorschemes'
 Plug 'gko/vim-coloresque'
 Plug 'itchyny/lightline.vim'
@@ -24,6 +22,7 @@ Plug 'kana/vim-smartinput'
 Plug 'kana/vim-textobj-user'
 Plug 'kewah/vim-stylefmt'
 Plug 'kristijanhusak/vim-carbon-now-sh'
+Plug 'leafgarland/typescript-vim'
 Plug 'mattn/emmet-vim'
 Plug 'mattn/jscomplete-vim'
 Plug 'myhere/vim-nodejs-complete'
@@ -31,7 +30,6 @@ Plug 'osyo-manga/vim-precious'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'rhysd/vim-textobj-ruby'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/context_filetype.vim'
 Plug 'slim-template/vim-slim'
@@ -47,6 +45,12 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
+Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'posva/vim-vue'
+" Plug 'zxqfl/tabnine-vim'
+if has('nvim')
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+endif
 call plug#end()
 
 " config
@@ -84,6 +88,10 @@ set updatecount=100
 set visualbell t_vb=
 set wildmode=longest,list:longest
 set wrapscan
+set shortmess+=c
+set signcolumn=yes
+set cmdheight=2
+set updatetime=300
 
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
@@ -169,11 +177,7 @@ let g:precious_enable_switchers = {
 \  "html": {
 \    "setfiletype": 1,
 \    "outer_region": 1
-\  },
-\  "markdown": {
-\    "setfiletype": 1,
-\    "outer_region": 1
-\  },
+\  }
 \}
 
 " lightline
@@ -183,17 +187,33 @@ let g:lightline = {
 \  'colorscheme': 'nord',
 \  'active': {
 \    'left': [ ['mode', 'paste'],
-\              ['gitbranch', 'readonly', 'filename', 'modified'] ],
+\              ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified'] ],
 \    'right': [ ['ale', 'lineinfo'],
 \             ['percent'],
 \             ['fileformat', 'fileencoding', 'filetype'] ]
 \  },
 \  'component_function': {
-\    'gitbranch': 'FugitiveStatusline',
+\    'gitbranch': 'FugitiveHead',
 \    'ale': 'ALEGetStatusLine',
-\    'readonly': 'LightLineReadonly'
+\    'readonly': 'LightLineReadonly',
+\    'fileformat': 'LightlineFileformat',
+\    'filetype': 'LightlineFiletype',
+\    'fileencoding': 'LightlineFileEncoding',
+\    'cocstatus': 'coc#status'
 \  }
 \}
+
+function! LightlineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightlineFileEncoding()
+  return winwidth(0) > 70 ? &fileencoding : ''
+endfunction
+
+function! LightlineFiletype()
+  return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
 
 function! LightLineReadonly()
   return &readonly && &filetype !~? 'help\|vimfiler' ? 'RO' : ''
@@ -203,6 +223,19 @@ endfunction
 " ----------------------------------------------------------------------------
 let g:nord_uniform_status_lines = 1
 let g:nord_uniform_diff_background = 1
+let g:nord_italic_comments = 1
+let g:nord_underline = 1
+let g:nord_italic = 1
+
+" NERDTree
+" ----------------------------------------------------------------------------
+let NERDTreeShowHidden=1
+let NERDTreeNaturalSort=1
+let NERDTreeRespectWildIgnore=1
+
+" deoplete
+" ----------------------------------------------------------------------------
+let g:deoplete#enable_at_startup = 1
 
 " keymap
 " ----------------------------------------------------------------------------
@@ -227,6 +260,8 @@ vmap <leader>ob <Plug>(openbrowser-smart-search)
 
 " Easy align
 vnoremap <silent> <Enter> :EasyAlign<cr>
+" Align GitHub-flavored Markdown tables
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " ALE move
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -236,10 +271,11 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 nmap ; :Buffers<CR>
 nmap <leader>t :Files<CR>
 nmap <leader>r :Tags<CR>
-nmap <leader>a :Ag<CR>
+nmap <leader>a :Rg<CR>
 nmap <leader>A :Ag!<CR>
 nmap <leader>h :History<CR>
 nmap <leader>g :GFiles?<CR>
+nmap <leader>G :GFiles<CR>
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
@@ -249,4 +285,3 @@ inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 " quickrun
 silent! map <unique> <Space>q <Plug>(quickrun)
 
-" vim:set ft=vim et sw=2:
