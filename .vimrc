@@ -25,6 +25,7 @@ Plug 'kristijanhusak/vim-carbon-now-sh'
 Plug 'leafgarland/typescript-vim'
 Plug 'mattn/emmet-vim'
 Plug 'mattn/jscomplete-vim'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'myhere/vim-nodejs-complete'
 Plug 'osyo-manga/vim-precious'
 Plug 'othree/es.next.syntax.vim'
@@ -45,12 +46,6 @@ Plug 'vim-jp/vimdoc-ja'
 Plug 'w0rp/ale'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
-Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'posva/vim-vue'
-" Plug 'zxqfl/tabnine-vim'
-if has('nvim')
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-endif
 call plug#end()
 
 " config
@@ -63,7 +58,7 @@ set backupext=-vimbackup
 set backupskip= 
 set clipboard=unnamed
 set complete=.,b,u,]
-set completeopt=menu,preview
+set completeopt+=menu,preview
 set directory=$HOME/.vim/files/swap/
 set expandtab
 set hidden
@@ -145,16 +140,21 @@ let g:ale_open_list = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:airline#extensions#ale#enabled = 1
-let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_typescript_tsserver_use_global = 1
 let g:ale_linters = {
-\   'javascript': ['prettier'],
+\   'javascript': ['eslint'],
 \   'scss': ['sasslint'],
 \   'ruby': ['rubocop'],
+\   'typescript': ['eslint', 'tsserver'],
 \}
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
+\   'javascript': ['eslint'],
 \   'scss': ['prettier'],
 \   'ruby': ['rubocop'],
+\   'typescript': ['eslint'],
 \}
 
 " FZF
@@ -187,7 +187,7 @@ let g:lightline = {
 \  'colorscheme': 'nord',
 \  'active': {
 \    'left': [ ['mode', 'paste'],
-\              ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified'] ],
+\              ['gitbranch', 'readonly', 'filename', 'modified'] ],
 \    'right': [ ['ale', 'lineinfo'],
 \             ['percent'],
 \             ['fileformat', 'fileencoding', 'filetype'] ]
@@ -198,8 +198,7 @@ let g:lightline = {
 \    'readonly': 'LightLineReadonly',
 \    'fileformat': 'LightlineFileformat',
 \    'filetype': 'LightlineFiletype',
-\    'fileencoding': 'LightlineFileEncoding',
-\    'cocstatus': 'coc#status'
+\    'fileencoding': 'LightlineFileEncoding'
 \  }
 \}
 
@@ -232,10 +231,6 @@ let g:nord_italic = 1
 let NERDTreeShowHidden=1
 let NERDTreeNaturalSort=1
 let NERDTreeRespectWildIgnore=1
-
-" deoplete
-" ----------------------------------------------------------------------------
-let g:deoplete#enable_at_startup = 1
 
 " keymap
 " ----------------------------------------------------------------------------

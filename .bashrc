@@ -120,9 +120,6 @@ function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 ### prompt
 export PS1="\[\e[32m\]\u\[\e[m\]@\[\e[33m\]\h\[\e[m\]:\w \[\e[34;40m\]\`parse_git_branch\`\[\e[m\]\n\\$ "
 
-# GOLANG
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
 complete -C '/usr/local/bin/aws_completer' aws
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
@@ -147,3 +144,5 @@ if [ -f /Users/count0/.tnsrc ]; then
     source /Users/count0/.tnsrc 
 fi
 ###-tns-completion-end-###
+
+eval "$(starship init bash)"
