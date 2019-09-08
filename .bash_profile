@@ -19,6 +19,6 @@ export NVM_DIR="$HOME/.nvm"
 # This loads nvm bash_completion
 [ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-export ANDROID_SDK_ROOT=/Users/count0/Library/Android/sdk
-export ANDROID_HOME=/Users/count0/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/emulator:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools
+export ANDROID_HOME=/Users/count0/Library/Android/sdk/
+export ANDROID_SDK_ROOT=/Users/count0/Library/Android/sdk/
+export PATH=${PATH}:${ANDROID_HOME}platform-tools:${ANDROID_SDK_ROOT}/emulator:${ANDROID_HOME}tools

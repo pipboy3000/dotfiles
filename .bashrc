@@ -22,7 +22,7 @@ alias chrome-canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Goo
 
 export HISTCONTROL=ignoreboth:erasedups
 export PATH=~/.rbenv/shims:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin
-export PATH=$PATH:~/.composer/vendor/bin
+export PATH=$PATH:~/.cargo/bin
 export PATH="$PATH:`yarn global bin`"
 export MANPATH="/usr/local/man:/usr/share/man:/usr/X11/man"
 
@@ -146,3 +146,4 @@ fi
 ###-tns-completion-end-###
 
 eval "$(starship init bash)"
+complete -C /Users/count0/bin/vault vault
