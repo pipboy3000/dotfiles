@@ -27,12 +27,9 @@ Plug 'mattn/emmet-vim'
 Plug 'mattn/jscomplete-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'myhere/vim-nodejs-complete'
-Plug 'osyo-manga/vim-precious'
 Plug 'othree/es.next.syntax.vim'
 Plug 'othree/yajs.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'scrooloose/nerdtree'
-Plug 'Shougo/context_filetype.vim'
 Plug 'slim-template/vim-slim'
 Plug 'thinca/vim-qfreplace'
 Plug 'thinca/vim-quickrun'
@@ -44,8 +41,13 @@ Plug 'tpope/vim-surround'
 Plug 'tyru/open-browser.vim'
 Plug 'vim-jp/vimdoc-ja'
 Plug 'w0rp/ale'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'Yggdroot/indentLine'
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " config
@@ -134,6 +136,10 @@ let g:markdown_fenced_languages = [
 " ----------------------------------------------------------------------------
 autocmd BufNewFile,BufRead *.vue set filetype=vue
 
+" Rust
+" ----------------------------------------------------------------------------
+let g:rustfmt_autosave = 1
+
 " ALE
 " ----------------------------------------------------------------------------
 let g:ale_open_list = 1
@@ -162,23 +168,6 @@ let g:ale_fixers = {
 let g:fzf_buffers_jump = 1
 let g:fzf_tags_command = 'ctags -R'
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
-
-" vim-precious
-" ----------------------------------------------------------------------------
-let g:precious_enable_switchers = {
-\  "*": {
-\    "setfiletype": 0,
-\    "outer_region": 0
-\  },
-\  "vue": {
-\    "setfiletype": 1,
-\    "outer_region": 1
-\  },
-\  "html": {
-\    "setfiletype": 1,
-\    "outer_region": 1
-\  }
-\}
 
 " lightline
 " ----------------------------------------------------------------------------
@@ -225,12 +214,6 @@ let g:nord_uniform_diff_background = 1
 let g:nord_italic_comments = 1
 let g:nord_underline = 1
 let g:nord_italic = 1
-
-" NERDTree
-" ----------------------------------------------------------------------------
-let NERDTreeShowHidden=1
-let NERDTreeNaturalSort=1
-let NERDTreeRespectWildIgnore=1
 
 " keymap
 " ----------------------------------------------------------------------------

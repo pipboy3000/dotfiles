@@ -145,5 +145,12 @@ if [ -f /Users/count0/.tnsrc ]; then
 fi
 ###-tns-completion-end-###
 
+# GCP
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc'
+source '/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.bash.inc'
+
+# starship
 eval "$(starship init bash)"
 complete -C /Users/count0/bin/vault vault
+
+complete -C /usr/local/bin/terraform terraform
