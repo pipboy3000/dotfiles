@@ -1,3 +1,5 @@
+#shellcheck disable=SC1090
+
 source ~/.bashrc
 
 ### completion
@@ -22,8 +24,6 @@ export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
 export ANDROID_HOME=/Users/count0/Library/Android/sdk/
 export ANDROID_SDK_ROOT=/Users/count0/Library/Android/sdk/
 export PATH=${PATH}:${ANDROID_HOME}platform-tools:${ANDROID_SDK_ROOT}/emulator:${ANDROID_HOME}tools
-
-export PATH="$HOME/.cargo/bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/count0/google-cloud-sdk/path.bash.inc' ]; then . '/Users/count0/google-cloud-sdk/path.bash.inc'; fi
